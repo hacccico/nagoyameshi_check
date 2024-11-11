@@ -81,7 +81,7 @@ public class AdminRestaurantController {
 	public String edit(@PathVariable(name = "id") Integer id, Model model) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(id);
 		String imageName = restaurant.getImageName();
-		RestaurantEditForm restaurantEditForm = new RestaurantEditForm(restaurant.getId(), restaurant.getName(), restaurant.getCategoryId(), null, restaurant.getDescription(), restaurant.getPrice(), restaurant.getCapacity(), restaurant.getOpeningTime(), restaurant.getClosingTime(), restaurant.getPostalCode(), restaurant.getAddress(), restaurant.getPhoneNumber());
+		RestaurantEditForm restaurantEditForm = new RestaurantEditForm(restaurant.getId(), restaurant.getName(), restaurant.getCategory(), null, restaurant.getDescription(), restaurant.getPrice(), restaurant.getCapacity(), restaurant.getOpeningTime(), restaurant.getClosingTime(), restaurant.getPostalCode(), restaurant.getAddress(), restaurant.getPhoneNumber());
 		
 		model.addAttribute("imageName", imageName);
 		model.addAttribute("restaurantEditForm",restaurantEditForm);
@@ -96,7 +96,7 @@ public class AdminRestaurantController {
 		}
 		restaurantService.update(restaurantEditForm);
 		redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");
-		return "redirect:/admin/houses";
+		return "redirect:/admin/restaurants";
 	}
 	
 	@PostMapping("/{id}/delete")

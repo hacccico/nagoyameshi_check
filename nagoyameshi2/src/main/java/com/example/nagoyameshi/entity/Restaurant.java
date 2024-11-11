@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,8 +24,9 @@ public class Restaurant {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "category_id")
-	private Integer categoryId;
+	@ManyToOne
+	@JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Category category;
 	
 	@Column(name = "image_name")
 	private String imageName;
@@ -38,10 +41,10 @@ public class Restaurant {
 	private Integer capacity;
 	
 	@Column(name = "opening_time")
-	private Timestamp openingTime;
+	private String openingTime;
 	
 	@Column(name = "closing_time")
-	private Timestamp closingTime;
+	private String closingTime;
 	
 	@Column(name = "postal_code")
 	private String postalCode;

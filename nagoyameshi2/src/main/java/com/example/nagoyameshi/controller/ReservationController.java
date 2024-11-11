@@ -1,5 +1,8 @@
 package com.example.nagoyameshi.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -13,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.nagoyameshi.entity.Reservation;
@@ -25,7 +29,7 @@ import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.ReservationService;
 
-@Controller
+@Controller 
 public class ReservationController {
 	private final ReservationRepository reservationRepository;
 	private final RestaurantRepository restaurantRepository;
@@ -47,7 +51,7 @@ public class ReservationController {
 		return "reservations/index";
 	}
 	
-	@GetMapping("/houses/{id}/reservations/input")
+	@GetMapping("/restaurants/{id}/reservations/input")
 	public String input(@PathVariable(name = "id") Integer id,
 			            @ModelAttribute @Validated ReservationInputForm reservationInputForm,
 			            BindingResult bindingResult,
@@ -85,14 +89,40 @@ public class ReservationController {
 		User user = userDetailsImpl.getUser();
 		
 		//予約日を取得する
-		String reservedDateTime = reservationInputForm.getReservedDateTime();
+		LocalDate reservationDate = reservationInputForm.getReservationDate();
 		
-		ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(restaurant.getId(), user.getId(), reservedDateTime.toString(), reservationInputForm.getNumberOfPeople());
+		//予約時間を取得する
+		LocalTime reservationTime = reservationInputForm.getReservationTime();
+		
+		// 現在の時間より後かどうかチェック
+	    if (!reservationService.isAfterCurrentTime(reservationDate, reservationTime)) {
+	        model.addAttribute("errorMessage", "予約時間は現在の時間より後でなければなりません。");
+	        model.addAttribute("restaurant", restaurant);
+	        return "restaurants/show";
+	    } 
+		
+		ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(restaurant.getId(), user.getId(), reservationDate.toString(), reservationTime.toString(), reservationInputForm.getNumberOfPeople());
 		
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("reservationRegisterForm", reservationRegisterForm);
 		
 		return "reservations/confirm";
+	}
+	
+	// フォームの送信先を担当するメソッド	
+	@PostMapping("/restaurants/{id}/reservations/create")	
+	public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm) {	
+	reservationService.create(reservationRegisterForm);	
+	return "redirect:/reservations?reserved";	
+	}	
+	
+	@PostMapping("/reservations/{id}/delete")
+	public String delete(@PathVariable(name = "id") Integer id,RedirectAttributes redirectAttributes) {
+		reservationRepository.deleteById(id);
+		
+		redirectAttributes.addFlashAttribute("successMessage", "予約をキャンセルしました。");
+		
+		return "redirect:/reservations";
 	}
 
 }

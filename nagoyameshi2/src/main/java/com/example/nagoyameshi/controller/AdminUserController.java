@@ -28,10 +28,11 @@ private final UserRepository userRepository;
 		Page<User> userPage;
 		
 		if (keyword != null && !keyword.isEmpty()) {
-			userPage = userRepository.findByNameLike(keyword, pageable);
-		} else {
-			userPage = userRepository.findAll(pageable);
-		}
+	            userPage = userRepository.findByEmailContaining(keyword, pageable);
+	       
+	    } else {
+	        userPage = userRepository.findAll(pageable);
+	    }
 		
 		model.addAttribute("userPage", userPage);
 		model.addAttribute("keyword", keyword);

@@ -38,6 +38,7 @@ public class RestaurantService {
 			restaurant.setImageName(hashedImageName);
 		}
 		restaurant.setName(restaurantRegisterForm.getName());
+		restaurant.setCategory(restaurantRegisterForm.getCategory());
 		restaurant.setDescription(restaurantRegisterForm.getDescription());
 		restaurant.setPrice(restaurantRegisterForm.getPrice());
 		restaurant.setCapacity(restaurantRegisterForm.getCapacity());
@@ -65,6 +66,7 @@ public class RestaurantService {
 		}
 		
 		restaurant.setName(restaurantEditForm.getName());
+		restaurant.setCategory(restaurantEditForm.getCategory());
 		restaurant.setDescription(restaurantEditForm.getDescription());
 		restaurant.setPrice(restaurantEditForm.getPrice());
 		restaurant.setCapacity(restaurantEditForm.getCapacity());

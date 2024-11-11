@@ -1,8 +1,8 @@
 package com.example.nagoyameshi.form;
 
-import java.sql.Timestamp;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.nagoyameshi.entity.Category;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -19,8 +19,8 @@ public class RestaurantEditForm {
 	@NotBlank(message = "店舗名を入力してください。")
 	private String name;
 	
-	@NotBlank(message = "カテゴリを入力してください。")
-	private Integer categoryId;
+	@NotNull(message = "カテゴリを入力してください。")
+	private Category category;
 	
 	private MultipartFile imageFile;
 	
@@ -35,10 +35,10 @@ public class RestaurantEditForm {
 	private Integer capacity;
 	
 	@NotBlank(message = "開店時間を入力してください。")
-	private Timestamp openingTime;
+	private String openingTime;
 	
 	@NotBlank(message = "閉店時間を入力してください。")
-	private Timestamp closingTime;
+	private String closingTime;
 	
 	@NotBlank(message = "郵便番号を入力してください。")
 	private String postalCode;

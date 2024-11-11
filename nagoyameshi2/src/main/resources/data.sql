@@ -15,46 +15,47 @@ INSERT IGNORE INTO restaurants (id, name, category_id, image_name, description, 
 -- rolesテーブル
 INSERT IGNORE INTO roles (id, name) VALUES (1, 'ROLE_GENERAL');
 INSERT IGNORE INTO roles (id, name) VALUES (2, 'ROLE_ADMIN');
+INSERT IGNORE INTO roles (id, name) VALUES (3, 'ROLE_PAYMENT');
 
 -- usersテーブル
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (1, '侍 太郎', 'taro.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', 1, 1, true);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (2, '侍 花子', 'hanako.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', 2, 2, true);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (3, '侍 義勝', 'yoshikatsu.samurai@example.com', 'password', 1, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (4, '侍 幸美', 'sachimi.samurai@example.com', 'password', 2, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (5, '侍 雅', 'miyabi.samurai@example.com', 'password', 1, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (6, '侍 正保', 'masayasu.samurai@example.com', 'password', 2, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (7, '侍 真由美', 'mayumi.samurai@example.com', 'password', 1, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (8, '侍 安民', 'yasutami.samurai@example.com', 'password', 2, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (9, '侍 章緒', 'akio.samurai@example.com', 'password', 1, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (10, '侍 祐子', 'yuko.samurai@example.com', 'password', 2, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (11, '侍 秋美', 'akimi.samurai@example.com', 'password', 1, 1, false);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (12, '侍 信平', 'shinpei.samurai@example.com', 'password', 2, 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (1, '侍 太郎', 'taro.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', '', 1, true);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (2, '侍 花子', 'hanako.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', '', 2, true);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (3, '侍 義勝', 'yoshikatsu.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (4, '侍 幸美', 'sachimi.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (5, '侍 雅', 'miyabi.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (6, '侍 正保', 'masayasu.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (7, '侍 真由美', 'mayumi.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (8, '侍 安民', 'yasutami.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (9, '侍 章緒', 'akio.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (10, '侍 祐子', 'yuko.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (11, '侍 秋美', 'akimi.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (12, '侍 信平', 'shinpei.samurai@example.com', 'password', '', 1, false);
 
 --categoriesテーブル
-INSERT IGNORE INTO categories (id, category_name) VALUES (1, '中華');
-INSERT IGNORE INTO categories (id, category_name) VALUES (2, 'イタリアン');
-INSERT IGNORE INTO categories (id, category_name) VALUES (3, 'アジア料理');
-INSERT IGNORE INTO categories (id, category_name) VALUES (4, '韓国料理');
-INSERT IGNORE INTO categories (id, category_name) VALUES (5, '洋食');
-INSERT IGNORE INTO categories (id, category_name) VALUES (6, '和食');
-INSERT IGNORE INTO categories (id, category_name) VALUES (7, '焼き肉');
-INSERT IGNORE INTO categories (id, category_name) VALUES (8, 'ファーストフード');
-INSERT IGNORE INTO categories (id, category_name) VALUES (9, '居酒屋');
-INSERT IGNORE INTO categories (id, category_name) VALUES (10, 'ラーメン');
-INSERT IGNORE INTO categories (id, category_name) VALUES (11, 'カレー');
+INSERT IGNORE INTO categories (id, name) VALUES (1, '中華');
+INSERT IGNORE INTO categories (id, name) VALUES (2, 'イタリアン');
+INSERT IGNORE INTO categories (id, name) VALUES (3, 'アジア料理');
+INSERT IGNORE INTO categories (id, name) VALUES (4, '韓国料理');
+INSERT IGNORE INTO categories (id, name) VALUES (5, '洋食');
+INSERT IGNORE INTO categories (id, name) VALUES (6, '和食');
+INSERT IGNORE INTO categories (id, name) VALUES (7, '焼き肉');
+INSERT IGNORE INTO categories (id, name) VALUES (8, 'ファーストフード');
+INSERT IGNORE INTO categories (id, name) VALUES (9, '居酒屋');
+INSERT IGNORE INTO categories (id, name) VALUES (10, 'ラーメン');
+INSERT IGNORE INTO categories (id, name) VALUES (11, 'カレー');
 
 -- reservationsテーブル
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (1, 1, 1, '2024-12-01 18:00', 2);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (2, 2, 1, '2024-12-01 18:00', 3);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (3, 3, 1, '2024-12-01 18:00', 4);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (4, 4, 1, '2024-12-01 18:00', 5);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (5, 5, 1, '2024-12-01 18:00', 6);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (6, 6, 1, '2024-12-01 18:00', 2);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (7, 7, 1, '2024-12-01 18:00', 3);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (8, 8, 1, '2024-12-01 18:00', 4);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (9, 9, 1, '2024-12-01 18:00', 5);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (10, 10, 1, '2024-12-01 18:00', 6);
-INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reserved_datetime, number_of_people) VALUES (11, 11, 1, '2024-12-01 18:00', 2);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (1, 1, 1, '2024-12-01', '18:00', 2);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (2, 2, 1, '2024-12-02', '18:00', 3);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (3, 3, 1, '2024-12-03', '18:00', 4);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (4, 4, 1, '2024-12-04', '18:00', 5);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (5, 5, 1, '2024-12-05', '18:00', 6);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (6, 6, 1, '2024-12-06', '18:00', 2);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (7, 7, 1, '2024-12-07', '18:00', 3);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (8, 8, 1, '2024-12-08', '18:00', 4);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (9, 9, 1, '2024-12-09', '18:00', 5);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (10, 10, 1, '2024-12-10', '18:00', 6);
+INSERT IGNORE INTO reservations (id, restaurant_id, user_id, reservation_date, reservation_time, number_of_people) VALUES (11, 11, 1, '2024-12-11', '18:00', 2);
 
 --reviewテーブル
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (1, 1, 1, '5', 'とても美味しかったです。また来たいです。', '2024-04-01', '2024-04-01');

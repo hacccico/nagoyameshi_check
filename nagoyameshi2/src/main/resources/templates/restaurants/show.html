@@ -76,7 +76,7 @@
                                              </div>
                                              
                                              <div class="col">
-												 <span class="nagoyameshi-pre-wrap" th:text="${restaurant.getCategoryId()}"></span>
+												 <span class="nagoyameshi-pre-wrap" th:text="${restaurant.getCategory().getName()}"></span>
 											 </div>
 										</div>
 										
@@ -117,6 +117,16 @@
                      
                                              <div class="col">
                                                  <span th:text="${restaurant.getOpeningTime()}"></span>
+                                             </div>
+                                         </div>
+                                         
+                                         <div class="row pb-2 mb-2 border-bottom">
+                                             <div class="col-4">
+                                                 <span class="fw-bold">閉店時間</span>
+                                             </div>
+                     
+                                             <div class="col">
+                                                 <span th:text="${restaurant.getClosingTime()}"></span>
                                              </div>
                                          </div>
                                          
@@ -165,9 +175,16 @@
 											<div class="card-body">
 												<form method="get" th:action="@{/restaurants/__${restaurant.getId()}__/reservations/input}" th:object="${reservationInputForm}">
 													<div class="form-group mb-2">
-														<label for="fromCheckinDateToCheckoutDate" class="col-form-label text-md-left fw-bold">予約日時</label>
-														<div th:if="${#fields.hasErrors('reservedDateTime')}" class="text-danger small mb-2" th:errors="*{reservedDateTime}"></div>
-														<input type="text" class="form-control" th:field="*{reservedDateTime}">
+														<label for="reservationDate" class="col-form-label text-md-left fw-bold">予約日</label>
+														<div th:if="${#fields.hasErrors('reservationDate')}" class="text-danger small mb-2" th:errors="*{reservationDate}"></div>
+														<input type="date" class="form-control" th:field="*{reservationDate}">
+													</div>
+													
+													<form method="get" th:action="@{/restaurants/__${restaurant.getId()}__/reservations/input}" th:object="${reservationInputForm}">
+													<div class="form-group mb-2">
+														<label for="reservationTime" class="col-form-label text-md-left fw-bold">予約時間</label>
+														<div th:if="${#fields.hasErrors('reservationTime')}" class="text-danger small mb-2" th:errors="*{reservationTime}"></div>
+														<input type="time" class="form-control" th:field="*{reservationTime}">
 													</div>
 													
 													<div class="form-group mb-4">

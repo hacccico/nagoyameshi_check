@@ -27,7 +27,12 @@
                              
                              <h1 class="mb-4 text-center">予約内容確認</h1>
                              
-                             <div th:object="${reservationRegisterForm}">
+                             <form method="post" th:action="@{/restaurants/__${restaurant.getId()}__/reservations/create}" th:object="${reservationRegisterForm}">
+                                 <input type="hidden" th:field="*{restaurantId}">
+                                 <input type="hidden" th:field="*{userId}">
+                                 <input type="hidden" th:field="*{reservationDate}">
+                                 <input type="hidden" th:field="*{reservationTime}">
+                                 <input type="hidden" th:field="*{numberOfPeople}">
 								 
 								 <div class="container mb-4">
 									 <div class="row pb-2 mb-2 border-bottom">
@@ -36,7 +41,19 @@
 									 </div>
 									 
 									 <div class="col">
-										 <span th:text="*{reservedDateTime}"></span>
+										 <span th:text="*{reservationDate}"></span>
+									 </div>
+									 </div>
+								 </div>
+								 
+								 <div class="container mb-4">
+									 <div class="row pb-2 mb-2 border-bottom">
+									 <div class="col-6">
+										 <span class="fw-bold">予約時間</span>
+									 </div>
+									 
+									 <div class="col">
+										 <span th:text="*{reservationTime}"></span>
 									 </div>
 									 </div>
 								 </div>
@@ -56,6 +73,7 @@
 								 <div class="d-flex justify-content-center">
 									 <button id="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn">予約を確定する</button>
 								 </div>
+								 </form>
                              </div>
 						</div>
                      </div>

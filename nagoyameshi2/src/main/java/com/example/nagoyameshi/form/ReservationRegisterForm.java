@@ -8,7 +8,8 @@ import lombok.Data;
 public class ReservationRegisterForm {
 	private Integer restaurantId;
 	private Integer userId;
-	private String reservedDateTime;
+	private String reservationDate;
+	private String reservationTime;
 	private Integer numberOfPeople;
 
 }

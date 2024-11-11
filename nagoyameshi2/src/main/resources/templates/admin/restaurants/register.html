@@ -52,8 +52,20 @@
 										<label for="category" class="col-form-label text-md-left fw-bold">カテゴリ</label>
 									</div>
 									<div class="col-md-8">
-										<div th:if="${#fields.hasErrors('categoryId')}" class="text-danger small mb-2" th:errors="*{categoryId}"></div>
-										<input type="number" class="form-control" th:field="*{categoryId}">
+										<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2" th:errors="*{category}"></div>
+										<select class="form-control form-select" name="category" th:field="*{category}">
+										<option value="1">中華</option>
+										<option value="2">イタリアン</option>
+										<option value="3">アジア料理</option>
+										<option value="4">韓国料理</option>
+										<option value="5">洋食</option>
+										<option value="6">和食</option>
+										<option value="7">焼き肉</option>
+										<option value="8">ファーストフード</option>
+										<option value="9">居酒屋</option>
+										<option value="10">ラーメン</option>
+										<option value="11">カレー</option>
+									</select>
 									</div>
 								</div>
 								
@@ -69,7 +81,7 @@
 								
 								<div class="form-group row mb-3">
 									<div class="col-md-4">
-										<label for="price" class="col-form-label text-md-left fw-bold">価格帯(単位:円)</label>
+										<label for="price" class="col-form-label text-md-left fw-bold">価格帯(◯円〜◯円)</label>
 									</div>
 									<div class="col-md-8">
 										<div th:if="${#fields.hasErrors('price')}" class="text-danger small mb-2" th:errors="*{price}"></div>
@@ -93,7 +105,32 @@
 									</div>
 									<div class="col-md-8">
 										<div th:if="${#fields.hasErrors('openingTime')}" class="text-danger small mb-2" th:errors="*{openingTime}"></div>
-										<input type="text" class="form-control" th:field="*{openingTime}">
+										<select class="form-control form-select" name="openingTime" th:field="*{openingTime}">
+										<option value="0:00">0:00</option>
+										<option value="1:00">1:00</option>
+										<option value="2:00">2:00</option>
+										<option value="3:00">3:00</option>
+										<option value="4:00">4:00</option>
+										<option value="5:00">5:00</option>
+										<option value="6:00">6:00</option>
+										<option value="7:00">7:00</option>
+										<option value="8:00">8:00</option>
+										<option value="9:00">9:00</option>
+										<option value="10:00">10:00</option>
+										<option value="11:00">11:00</option>
+										<option value="12:00">12:00</option>
+										<option value="13:00">13:00</option>
+										<option value="14:00">14:00</option>
+										<option value="15:00">15:00</option>
+										<option value="16:00">16:00</option>
+										<option value="17:00">17:00</option>
+										<option value="18:00">18:00</option>
+										<option value="19:00">19:00</option>
+										<option value="20:00">20:00</option>
+										<option value="21:00">21:00</option>
+										<option value="22:00">22:00</option>
+										<option value="23:00">23:00</option>
+									</select>
 									</div>
 								</div>
 								
@@ -103,7 +140,32 @@
 									</div>
 									<div class="col-md-8">
 										<div th:if="${#fields.hasErrors('closingTime')}" class="text-danger small mb-2" th:errors="*{closingTime}"></div>
-										<input type="text" class="form-control" th:field="*{closingTime}">
+										<select class="form-control form-select" name="closingTime" th:field="*{closingTime}">
+										<option value="0:00">0:00</option>
+										<option value="1:00">1:00</option>
+										<option value="2:00">2:00</option>
+										<option value="3:00">3:00</option>
+										<option value="4:00">4:00</option>
+										<option value="5:00">5:00</option>
+										<option value="6:00">6:00</option>
+										<option value="7:00">7:00</option>
+										<option value="8:00">8:00</option>
+										<option value="9:00">9:00</option>
+										<option value="10:00">10:00</option>
+										<option value="11:00">11:00</option>
+										<option value="12:00">12:00</option>
+										<option value="13:00">13:00</option>
+										<option value="14:00">14:00</option>
+										<option value="15:00">15:00</option>
+										<option value="16:00">16:00</option>
+										<option value="17:00">17:00</option>
+										<option value="18:00">18:00</option>
+										<option value="19:00">19:00</option>
+										<option value="20:00">20:00</option>
+										<option value="21:00">21:00</option>
+										<option value="22:00">22:00</option>
+										<option value="23:00">23:00</option>
+									</select>
 									</div>
 								</div>
 								

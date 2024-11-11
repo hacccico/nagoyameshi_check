@@ -1,12 +1,15 @@
 package com.example.nagoyameshi.service;
 
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.springframework.stereotype.Service;
 
 import com.example.nagoyameshi.entity.Reservation;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.User;
+import com.example.nagoyameshi.form.ReservationRegisterForm;
 import com.example.nagoyameshi.repository.ReservationRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.repository.UserRepository;
@@ -26,24 +29,19 @@ public class ReservationService {
 	}
 	
 	@Transactional
-	public void create(Map<String, String> paymentIntentObject) {
+	public void create(ReservationRegisterForm reservationRegisterForm) {
 		Reservation reservation = new Reservation();
-		
-		Integer restaurantId = Integer.valueOf(paymentIntentObject.get("restaurantId"));
-		Integer userId = Integer.valueOf(paymentIntentObject.get("userId"));
-		
-		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantId);
-		User user = userRepository.getReferenceById(userId);
-		//reservedDateTimeの定義
-		
-		Integer numberOfPeople = Integer.valueOf(paymentIntentObject.get("numberOfPeople"));
-		
+		Restaurant restaurant = restaurantRepository.getReferenceById(reservationRegisterForm.getRestaurantId());
+		User user = userRepository.getReferenceById(reservationRegisterForm.getUserId());
+		LocalDate reservationDate = LocalDate.parse(reservationRegisterForm.getReservationDate());
+		LocalTime reservationTime = LocalTime.parse(reservationRegisterForm.getReservationTime());
+
 		reservation.setRestaurant(restaurant);
 		reservation.setUser(user);
-		//reservedDateTimeをセット
-		
-		reservation.setNumberOfPeople(numberOfPeople);
-		
+		reservation.setReservationDate(reservationDate);
+		reservation.setReservationTime(reservationTime);
+		reservation.setNumberOfPeople(reservationRegisterForm.getNumberOfPeople());
+
 		reservationRepository.save(reservation);
 	}
 	//宿泊人数が定員以下かどうかをチェックする
@@ -52,5 +50,11 @@ public class ReservationService {
 	}
 	
 	//予約日時が未来かチェックする
+	public boolean isAfterCurrentTime(LocalDate reservationDate, LocalTime reservationTime) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime reservationDateTime = LocalDateTime.of(reservationDate, reservationTime);
+
+        return reservationDateTime.isAfter(now);
+    }
 
 }

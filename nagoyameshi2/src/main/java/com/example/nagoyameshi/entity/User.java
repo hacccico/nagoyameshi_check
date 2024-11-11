@@ -31,7 +31,7 @@ public class User {
 	private String password;
 	
 	@Column(name = "subscription_id")
-	private Integer subscriptionId;
+	private String subscriptionId;
 	
 	@ManyToOne
 	@JoinColumn(name = "role_id")
