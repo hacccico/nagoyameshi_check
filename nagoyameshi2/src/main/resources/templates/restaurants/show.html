@@ -24,8 +24,8 @@
 									<li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
 								</ol>
 								
-								<!--お気に入り機能-->
-							<div sec:authorize="isAuthenticated()">
+								<!--お気に入り機能(有料会員）-->
+							<div sec:authorize="hasRole('ROLE_PAYMENT')">
 								<div th:if="${favoriteFlag}">
 									<form th:action="@{/restaurants/{restaurantId}/favorites/delete(restaurantId=${restaurant.id})}" method="post">
 										<input type="hidden" name="favoriteId" th:value="${favoriteId}">
@@ -164,13 +164,14 @@
 									<div sec:authorize="isAnonymous()" class="col-lg-4 px-0 ps-lg-4 mb-4">
 										<div class="card">
 											<div class="card-body">
-												<p class="card-text">予約するには<a th:href="@{/login}">ログイン</a>が必要です。</p>
+												<p class="card-text">予約するには<a th:href="@{/login}">有料会員登録</a>が必要です。</p>
 												<button type="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn" disabled>予約する</button>
 											</div>
 										</div>
 									</div>
 									
-									<div sec:authorize="isAuthenticated()" class="col-lg-4 px-0 ps-lg-4 mb-4">
+									<!-- 予約する（有料会員）-->
+									<div sec:authorize="hasRole('ROLE_PAYMENT')" class="col-lg-4 px-0 ps-lg-4 mb-4">
 										<div class="card">
 											<div class="card-body">
 												<form method="get" th:action="@{/restaurants/__${restaurant.getId()}__/reservations/input}" th:object="${reservationInputForm}">
@@ -201,13 +202,13 @@
 										</div>
 									</div>
 									
-									<!-- レビューの表示-->
+									<!-- レビューの投稿表示（有料会員）-->
 									<div class="container">
 										<div class="row">
 											<div class="text-center">
 												<h1>レビュー</h1>
 											</div>
-											<div class="text-center" sec:authorize="isAuthenticated()" th:unless="${doneReviewFlag}">
+											<div class="text-center" sec:authorize="hasRole('ROLE_PAYMENT')" th:unless="${doneReviewFlag}">
 												<a class="btn text-white shadow-sm w-50 nagoyameshi-btn" th:href="@{/restaurants/__${restaurant.getId()}__/review/post}">レビューを投稿する</a>
 											</div>
 											<div th:if="${reviewFlag}">
@@ -219,7 +220,7 @@
 														<div class="card">
 															<div class="card-body">
 																<h3 class="card-title mb-3" th:text="${review.getUser().getName()}"></h3>
-																<div sec:authorize="isAuthenticated()" th:if="${loginUserId} == ${review.getUser().getId()}">
+																<div sec:authorize="hasRole('ROLE_PAYMENT')" th:if="${loginUserId} == ${review.getUser().getId()}">
 																	<a class="text-right" th:href="@{/restaurants/__${restaurant.getId()}__/review/__${review.getId()}__/edit}">編集</a>
 																	<a th:href="@{/restaurants/__${restaurant.getId()}__/review/__${review.getId()}__/delete}" class="nagoyameshi-link-danger" data-bs-toggle="modal" th:data-bs-target="${'#deleteReviewModal' + review.getId()}">削除</a>
 																	<!--削除用モーダル-->

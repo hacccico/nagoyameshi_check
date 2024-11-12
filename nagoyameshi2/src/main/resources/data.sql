@@ -20,7 +20,7 @@ INSERT IGNORE INTO roles (id, name) VALUES (3, 'ROLE_PAYMENT');
 -- usersテーブル
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (1, '侍 太郎', 'taro.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', '', 1, true);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (2, '侍 花子', 'hanako.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', '', 2, true);
-INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (3, '侍 義勝', 'yoshikatsu.samurai@example.com', 'password', '', 1, false);
+INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (3, '侍 有料', 'payment.samurai@example.com', '$2a$10$2JNjTwZBwo7fprL2X4sv.OEKqxnVtsVQvuXDkI8xVGix.U3W5B7CO', '', 3, true);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (4, '侍 幸美', 'sachimi.samurai@example.com', 'password', '', 1, false);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (5, '侍 雅', 'miyabi.samurai@example.com', 'password', '', 1, false);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (6, '侍 正保', 'masayasu.samurai@example.com', 'password', '', 1, false);
@@ -30,6 +30,7 @@ INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, e
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (10, '侍 祐子', 'yuko.samurai@example.com', 'password', '', 1, false);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (11, '侍 秋美', 'akimi.samurai@example.com', 'password', '', 1, false);
 INSERT IGNORE INTO users (id, name, email, password, subscription_id, role_id, enabled) VALUES (12, '侍 信平', 'shinpei.samurai@example.com', 'password', '', 1, false);
+
 
 --categoriesテーブル
 INSERT IGNORE INTO categories (id, name) VALUES (1, '中華');
@@ -62,10 +63,10 @@ INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comme
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (2, 1, 3, '5', '素敵な接客でした。', '2024-04-01', '2024-04-01');
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (3, 1, 4, '5', 'とても美味しかったです。また来たいです。', '2024-04-01', '2024-04-01');
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (4, 1, 2, '5', 'とても美味しかったです。また来たいです。', '2024-04-01', '2024-04-01');
-INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (5, 1, 3, '5', '家族を連れてまた来たいです。。', '2024-04-01', '2024-04-01');
-INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (6, 1, 2, '4', 'とてもきれいで快適に過ごせました。', '2024-04-01', '2024-04-01');
+INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (5, 1, 5, '5', '家族を連れてまた来たいです。。', '2024-04-01', '2024-04-01');
+INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (6, 1, 7, '4', 'とてもきれいで快適に過ごせました。', '2024-04-01', '2024-04-01');
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (7, 1, 8, '5', 'また来たいです。', '2024-04-01', '2024-04-01');
-INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (8, 1, 4, '3', 'とてもきれいで快適に過ごせました。', '2024-04-01', '2024-04-01');
+INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (8, 1, 9, '3', 'とてもきれいで快適に過ごせました。', '2024-04-01', '2024-04-01');
 INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (9, 1, 6, '5', '素敵な接客でした。', '2024-04-01', '2024-04-01');
-INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (10, 1, 3, '4', 'とても美味しく快適に過ごせました。', '2024-04-01', '2024-04-01');
-INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (11, 1, 3, '2', '接客が良かったです。', '2024-04-01', '2024-04-01');
+INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (10, 1, 10, '4', 'とても美味しく快適に過ごせました。', '2024-04-01', '2024-04-01');
+INSERT IGNORE INTO review (id, restaurant_id, user_id, review_star, review_comment, created_at, updated_at) VALUES (11, 1, 11, '2', '接客が良かったです。', '2024-04-01', '2024-04-01');

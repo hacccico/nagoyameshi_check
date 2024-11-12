@@ -11,5 +11,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public Page<User> findByEmailContaining(String emailKeyword, Pageable pageable);
 
 	public Page<User> findByNameLike(String nameKeyword, Pageable pageable);
+	
+	//idを指定してuserを取得する
+		public User findUserById(int id);
 
 }

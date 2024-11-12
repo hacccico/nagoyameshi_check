@@ -58,9 +58,9 @@
 									<div class="col-md-8">
 										<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2" th:errors="*{category}"></div>
 										<select id="category" name="category" class="form-select-nagoyameshi" th:field="*{category}">
-    <option value="" th:selected="${category == null or category == ''}">カテゴリーを選択</option>
-    <option th:each="catagory : ${categories}" th:value="${catagory.id}" th:text="${catagory.name}"></option>
-</select>
+                                        <option value="" th:selected="${category == null or category == ''}">カテゴリーを選択</option>
+                                        <option th:each="catagory : ${categories}" th:value="${catagory.id}" th:text="${catagory.name}"></option>
+                                        </select>
 									</div>
 								</div>
 								

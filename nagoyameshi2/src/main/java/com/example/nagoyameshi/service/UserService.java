@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.nagoyameshi.entity.Role;
 import com.example.nagoyameshi.entity.User;
+import com.example.nagoyameshi.form.ResetPasswordForm;
 import com.example.nagoyameshi.form.SignupForm;
 import com.example.nagoyameshi.form.UserEditForm;
 import com.example.nagoyameshi.repository.RoleRepository;
@@ -70,6 +71,15 @@ public class UserService {
 	public boolean isEmailChanged(UserEditForm userEditForm) {
 		User currentUser = userRepository.getReferenceById(userEditForm.getId());
 		return !userEditForm.getEmail().equals(currentUser.getEmail());
+	}
+	
+	@Transactional
+	public void updatePassword(ResetPasswordForm resetPasswordForm) {
+		User user = userRepository.getReferenceById(resetPasswordForm.getId());
+
+		user.setPassword(passwordEncoder.encode(resetPasswordForm.getPassword()));
+
+		userRepository.save(user);
 	}
 
 }
