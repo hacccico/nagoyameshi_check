@@ -1,5 +1,7 @@
 package com.example.nagoyameshi.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.form.RestaurantRegisterForm;
+import com.example.nagoyameshi.repository.CategoryRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.service.RestaurantService;
 
@@ -27,10 +31,12 @@ import com.example.nagoyameshi.service.RestaurantService;
 public class AdminRestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final RestaurantService restaurantService;
+	private final CategoryRepository categoryRepository;
 	
-	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService) {
+	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,  CategoryRepository categoryRepository) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
+		this.categoryRepository = categoryRepository;
 	}
 	
 	@GetMapping
@@ -85,6 +91,10 @@ public class AdminRestaurantController {
 		
 		model.addAttribute("imageName", imageName);
 		model.addAttribute("restaurantEditForm",restaurantEditForm);
+		
+		List<Category> categories = categoryRepository.findAll();
+		
+		model.addAttribute("categories", categories);
 		
 		return "admin/restaurants/edit";
 	}

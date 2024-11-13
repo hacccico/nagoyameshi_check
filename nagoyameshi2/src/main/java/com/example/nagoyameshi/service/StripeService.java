@@ -5,6 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.example.nagoyameshi.entity.Role;
+import com.example.nagoyameshi.entity.User;
+import com.example.nagoyameshi.repository.RoleRepository;
+import com.example.nagoyameshi.repository.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
@@ -17,10 +21,13 @@ public class StripeService {
 	@Value("${stripe.api-key}")
 	private String stripeApiKey;
 	
-	private final ReservationService reservationService;
+	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 	
-	public StripeService(ReservationService reservationService) {
-		this.reservationService = reservationService;
+	public StripeService(UserRepository userRepository, RoleRepository roleRepository) {
+		
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 	}
 	
 	
@@ -35,7 +42,16 @@ public class StripeService {
 				session = Session.retrieve(session.getId(), params, null);
 				Map<String, String> paymentIntentObject = session.getMetadata();
 				String subscriptionId = session.getSubscription();
+				String id = paymentIntentObject.get("id");
 				
+				User user = userRepository.getReferenceById(Integer.parseInt(id));
+				user.setSubscriptionId(subscriptionId);
+				
+				Role role = roleRepository.findByName("ROLE_PAYMENT");
+				user.setRole(role);
+				
+				userRepository.save(user);
+		
 			} catch (StripeException e) {
 				e.printStackTrace();
 			}

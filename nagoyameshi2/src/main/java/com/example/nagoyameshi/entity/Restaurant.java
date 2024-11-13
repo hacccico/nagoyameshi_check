@@ -25,7 +25,7 @@ public class Restaurant {
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "category_id")
 	private Category category;
 	
 	@Column(name = "image_name")

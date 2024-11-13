@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 public class RestaurantRegisterForm {
-	@NotNull
+	
 	private Integer id;
 	
 	@NotBlank(message = "店舗名を入力してください。")
