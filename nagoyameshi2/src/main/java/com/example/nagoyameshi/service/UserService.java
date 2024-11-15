@@ -1,5 +1,6 @@
 package com.example.nagoyameshi.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,18 @@ import com.example.nagoyameshi.form.SignupForm;
 import com.example.nagoyameshi.form.UserEditForm;
 import com.example.nagoyameshi.repository.RoleRepository;
 import com.example.nagoyameshi.repository.UserRepository;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Subscription;
+import com.stripe.param.SubscriptionCancelParams;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
+	@Value("${stripe.api-key}")
+	private String stripeApiKey;
+	
 	private final UserRepository userRepository;
 	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
@@ -81,5 +89,28 @@ public class UserService {
 
 		userRepository.save(user);
 	}
+	
+    @Transactional
+    public void cancelSubscription(User user) {
+       Stripe.apiKey = stripeApiKey;
+
+		try {
+	    	 Subscription resource;
+			 resource = Subscription.retrieve(user.getSubscriptionId());
+	    	 SubscriptionCancelParams params = SubscriptionCancelParams.builder().build();
+	    	 resource.cancel(params);
+	         user.setSubscriptionId("");
+	         
+	         Role role = roleRepository.findByName("ROLE_GENERAL");
+	         user.setRole(role);
+	         
+	         userRepository.save(user);
+		} catch (StripeException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+    }
+
 
 }

@@ -5,17 +5,49 @@
              
         <div th:replace="~{fragment :: styles}"></div>
           
-        <title>予約内容確認</title>   
+        <title>サブスクリプション契約</title>   
     </head>
     <body>
-        <div class="samuraitravel-wrapper">
-            <!-- ヘッダー -->
-            <div th:replace="~{fragment :: header}"></div>
-            
-            <main>
-                                <div class="d-flex justify-content-center">
-                                    <button id="paymentButton" class="btn text-white shadow-sm w-100 samuraitravel-btn">サブスクリプション</button>
+        
+	<div class="nagoyameshi-wrapper">
+		<!-- ヘッダー -->
+		<div th:replace="~{fragment :: header}"></div>
+
+		<main>
+			<div class="container nagoyameshi-container pb-5">
+				<div class="row justify-content-center">
+					<nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+						<ol class="breadcrumb mb-0">
+							<li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
+							<li class="breadcrumb-item active" aria-current="page">サブスクリプション契約</li>
+						</ol>
+					</nav>
+
+					<h1 class="text-center mb-3">サブスクリプション契約</h1>
+
+						<div class="card">
+							<div class="card-header text-center">
+								サブスクリプション加入のメリット
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">・店舗をアプリから予約可能</li>
+								<li class="list-group-item">・店舗をお気に入りに追加出来る機能</li>
+								<li class="list-group-item">・レビューを投稿可能</li>
+								<li class="list-group-item">・月額300円で利用可能</li>
+							</ul>
+						</div>
+
+						<p>サブスクリプション加入は以下ボタンより加入できます</p>
+						<p>テストカード番号:4242 4242 4242 4242</p>
+
+					</form>
+					 <div class="d-flex justify-content-center">
+                                    <button id="paymentButton" class="btn text-white shadow-sm w-100 nagoyameshi-btn">サブスクリプション契約を開始する</button>
                                 </div>
+				</div>
+				</div>
+				
+                               
             </main>
             
             <!-- フッター -->

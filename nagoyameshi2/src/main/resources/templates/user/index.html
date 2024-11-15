@@ -55,7 +55,9 @@
 										 <span th:text="${user.getEmail()}"></span>
 									 </div>
 								 </div>                               
-                             </div>                                                                                                                           
+                             </div>  
+                             
+                             <a sec:authorize="hasRole('ROLE_PAYMENT')"　href="https://billing.stripe.com/p/login/test_6oEbM5drLbiO1WwbII">クレジットカード情報の変更はこちらから</a>                                                                                                                         
                          </div>
                      </div>
                  </div>

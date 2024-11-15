@@ -11,12 +11,6 @@
 			<div th:replace="~{fragment :: header}"></div>
 			
 			<main>
-				 <form method="post" th:action="@{/subscription/add}" class="mb-5 samuraitravel-search-form">
-							<button type="submit" >サブスクリプション</button>
-                        </form>
-                        <form method="post" th:action="@{/subscription/cancel}" class="mb-5 samuraitravel-search-form">
-							<button type="submit" >キャンセル</button>
-                        </form>
 
 				<div class="container pt-4 pb-5 nagoyameshi-container">
 					<div th:if="${param.loggedIn}" class="alert alert-info">
