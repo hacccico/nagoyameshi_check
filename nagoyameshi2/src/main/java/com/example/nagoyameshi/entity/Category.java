@@ -1,5 +1,9 @@
 package com.example.nagoyameshi.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.nagoyameshi.repository.CategoryRepository;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +23,13 @@ public class Category {
 	
 	@Column(name = "name")
 	private String name;
+
+	@Autowired
+    private static CategoryRepository categoryRepository;
+
+    public static Category valueOf(String categoryName) {
+        return categoryRepository.findByName(categoryName);
+    }
 	
 
 }

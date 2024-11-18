@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Favorite;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.Review;
@@ -20,6 +21,7 @@ import com.example.nagoyameshi.repository.FavoriteRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.repository.ReviewRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
+import com.example.nagoyameshi.service.CategoryService;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -27,15 +29,18 @@ public class RestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final ReviewRepository reviewRepository;
 	private final FavoriteRepository favoriteRepository;
+	private final CategoryService categoryService;
 	
-	public RestaurantController(RestaurantRepository restaurantRepository, ReviewRepository reviewRepository, FavoriteRepository favoriteRepository) {
+	public RestaurantController(RestaurantRepository restaurantRepository, ReviewRepository reviewRepository, FavoriteRepository favoriteRepository, CategoryService categoryService) {
 		this.restaurantRepository = restaurantRepository;
 		this.reviewRepository = reviewRepository;
 		this.favoriteRepository = favoriteRepository;
+		this.categoryService = categoryService;
 	}
 	
 	@GetMapping
 	public String index(@RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(name = "category", required = false) String categoryName,
 			@RequestParam(name = "order", required = false) String order,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			Model model) {
@@ -44,11 +49,19 @@ public class RestaurantController {
 		//どの検索フォームが送信されたかによって条件分岐
 		if (keyword != null && !keyword.isEmpty()) {
 			restaurantPage = restaurantRepository.findByNameLikeOrderByCreatedAtDesc("%" + keyword + "%", pageable);
+		} else if (categoryName != null) {
+			 Category category = categoryService.getCategoryByName(categoryName);
+	            if (category != null) {
+	                restaurantPage = restaurantRepository.findByCategoryOrderByCreatedAtDesc(category, pageable);
+	            } else {
+	                restaurantPage = Page.empty();
+	            }
 		} else {
 			restaurantPage = restaurantRepository.findAllByOrderByCreatedAtDesc(pageable);
 		}
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", categoryName);
 		model.addAttribute("order", order);
 		
 		return "restaurants/index";

@@ -164,7 +164,16 @@
 									<div sec:authorize="isAnonymous()" class="col-lg-4 px-0 ps-lg-4 mb-4">
 										<div class="card">
 											<div class="card-body">
-												<p class="card-text">予約するには<a th:href="@{/login}">有料会員登録</a>が必要です。</p>
+												<p class="card-text">予約するには<a th:href="@{/login}">ログイン</a>が必要です。</p>
+												<button type="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn" disabled>予約する</button>
+											</div>
+										</div>
+									</div>
+									
+									<div sec:authorize="hasRole('ROLE_GENERAL')" class="col-lg-4 px-0 ps-lg-4 mb-4">
+										<div class="card">
+											<div class="card-body">
+												<p class="card-text">予約するには<a th:href="@{/subscription/add}">有料会員登録</a>が必要です。</p>
 												<button type="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn" disabled>予約する</button>
 											</div>
 										</div>

@@ -36,12 +36,6 @@
 								 <p th:if="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3" th:text="${'検索結果:' + restaurantPage.getTotalElements() + '件' + '(' + (restaurantPage.getNumber() +1) + ' / ' + restaurantPage.getTotalPages() + ' ページ)'}"></p>
 								 <p th:unless="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3" th:text="${'検索結果:' + restaurantPage.getTotalElements() + '件'}"></p>
 								 
-								 <form method="get" th:action="@{/restaurants}" class="mb-3nagoyameshi-sort-box">
-									 <input th:if="${keyword}" type="hidden" name="keyword" th:value="${keyword}">
-									 <select class="form-select form-select-sm" name="order" onChange="this.form.submit();">
-										 <option value="createdAtDesc" th:selected="${order == 'createdAtDesc' || order == null}">新着順</option>
-									</select>
-								 </form>
 							 </div>
 							 
 							 <div class="mb-3" th:each="restaurant : ${restaurantPage}">
